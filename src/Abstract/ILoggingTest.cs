@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Soenneker.Tests.Logging.Abstract;
 
 /// <summary>
-///  base testing class providing logging capabilities
+///  A base testing class providing logging capabilities
 /// </summary>
 public interface ILoggingTest
 {
