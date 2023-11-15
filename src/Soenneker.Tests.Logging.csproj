@@ -9,7 +9,7 @@
 
     <PropertyGroup>
         <Description>A base testing class providing logging capabilities</Description>
-        <Version Condition="'$(BUILD_VERSION)' == ''">1.0.0</Version>
+        <Version Condition="'$(BUILD_VERSION)' == ''">2.0.0</Version>
         <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
         <AssemblyName>Soenneker.Tests.Logging</AssemblyName>
         <PackageId>Soenneker.Tests.Logging</PackageId>
