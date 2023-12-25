@@ -8,5 +8,5 @@
 ## Installation
 
 ```
-Install-Package Soenneker.Tests.Logging
+dotnet add package Soenneker.Tests.Logging
 ```
