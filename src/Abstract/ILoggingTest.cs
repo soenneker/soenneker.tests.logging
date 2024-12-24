@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Threading;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Soenneker.Tests.Logging.Abstract;
 
@@ -18,4 +20,9 @@ public interface ILoggingTest
     /// Wraps Task.Delay with a log statement. Should be used for delays in tests. <para/>
     /// </summary>
     Task Delay(int millisecondsDelay, string? reason = null, bool log = true);
+
+    /// <summary>
+    /// Equivalent to TestContext.Current.CancellationToken./>
+    /// </summary>
+    CancellationToken CancellationToken { get; }
 }
