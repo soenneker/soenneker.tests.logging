@@ -38,6 +38,6 @@
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
         <PackageReference Include="FluentAssertions" Version="7.0.0" />
-        <PackageReference Include="xunit.v3.core" Version="1.0.0" />
+        <PackageReference Include="xunit.v3.core" Version="1.0.1" />
     </ItemGroup>
 </Project>
