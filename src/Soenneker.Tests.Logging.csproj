@@ -36,7 +36,7 @@
         <None Include="..\README.md" Pack="true" PackagePath="\" />
         <None Include="..\LICENSE" Pack="true" PackagePath="\" />
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
-        <PackageReference Include="AwesomeAssertions" Version="8.0.0" />
+        <PackageReference Include="AwesomeAssertions" Version="8.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
         <PackageReference Include="xunit.v3.extensibility.core" Version="1.1.0" />
     </ItemGroup>
