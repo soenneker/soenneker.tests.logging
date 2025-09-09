@@ -13,7 +13,7 @@ public abstract class LoggingTest : ILoggingTest
     /// <summary>
     /// Meant to be set within derivations
     /// </summary>
-    protected Lazy<ILogger<LoggingTest>> LazyLogger { get; set; } = default!;
+    protected Lazy<ILogger<LoggingTest>> LazyLogger { get; set; } = null!;
 
     public ILogger<LoggingTest> Logger => LazyLogger.Value;
 
