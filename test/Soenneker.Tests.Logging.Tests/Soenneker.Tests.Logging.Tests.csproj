@@ -7,6 +7,8 @@
         <OutputType>exe</OutputType>
             <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
             <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+            <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
+
     </PropertyGroup>
 
     <ItemGroup>
