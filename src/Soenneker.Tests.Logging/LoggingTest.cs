@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Soenneker.Tests.Logging.Abstract;
-using Xunit;
 
 namespace Soenneker.Tests.Logging;
 
@@ -17,9 +16,7 @@ public abstract class LoggingTest : ILoggingTest
 
     public ILogger<LoggingTest> Logger => LazyLogger.Value;
 
-    public CancellationToken CancellationToken => TestContext.Current.CancellationToken;
-
-    public Task Delay(int millisecondsDelay, string? reason = null, bool log = true)
+    public Task Delay(int millisecondsDelay, string? reason = null, bool log = true, CancellationToken cancellationToken = default)
     {
         if (log)
         {
@@ -29,6 +26,6 @@ public abstract class LoggingTest : ILoggingTest
                 Logger.LogDebug("Test delay for {ms}ms ({reason})...", millisecondsDelay, reason);
         }
 
-        return Task.Delay(millisecondsDelay, CancellationToken);
+        return Task.Delay(millisecondsDelay, cancellationToken);
     }
 }
