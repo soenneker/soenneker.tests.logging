@@ -6,7 +6,7 @@ using Soenneker.Tests.Logging.Abstract;
 
 namespace Soenneker.Tests.Logging;
 
-///<inheritdoc cref="ILoggingTest"/>
+/// <inheritdoc cref="ILoggingTest"/>
 public abstract class LoggingTest : ILoggingTest
 {
     /// <summary>
