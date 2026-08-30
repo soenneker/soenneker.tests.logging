@@ -5,36 +5,45 @@
 
 # Soenneker.Tests.Logging
 
-A base testing class providing logging capabilities.
+An infrastructure base class for test frameworks that want a lazily supplied `ILogger` and logged asynchronous delays.
 
-## Install
+## Installation
 
 ```bash
 dotnet add package Soenneker.Tests.Logging
 ```
 
-## Quick start
+Most applications should consume this indirectly through `Soenneker.Tests.Unit`, `Soenneker.Tests.HostedUnit`, or `Soenneker.Tests.Integration`, which configure the logger for their respective lifecycles.
+
+## Custom derivation
+
+When deriving directly, initialize `LazyLogger` before `Logger` or a logged `Delay` is used:
 
 ```csharp
-using Soenneker.Tests.Logging.Abstract;
+using Microsoft.Extensions.Logging;
+using Soenneker.Tests.Logging;
 
-ILoggingTest loggingTest = /* resolve from DI */;
-await loggingTest.Delay(1, default);
+public abstract class LoggedTestBase : LoggingTest
+{
+    protected LoggedTestBase(ILoggerFactory loggerFactory)
+    {
+        LazyLogger = new Lazy<ILogger<LoggingTest>>(
+            () => loggerFactory.CreateLogger<LoggingTest>());
+    }
+}
 ```
 
-Wraps Task.Delay with a log statement. Should be used for delays in tests.
+The package does not create or own the logger factory. The derived test infrastructure controls logger lifetime and where output is written.
 
-## What you get
+## Logged delays
 
-- `ILoggingTest` — A base testing class providing logging capabilities.
+```csharp
+await Delay(
+    millisecondsDelay: 250,
+    reason: "waiting for the worker to observe the message",
+    cancellationToken: cancellationToken);
+```
 
-## API at a glance
+`Delay` logs at debug level immediately before calling `Task.Delay`. Set `log: false` to suppress that message. Cancellation and invalid delay values follow normal `Task.Delay` behavior.
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `ILoggingTest.Logger` | Will build and return a Microsoft logger from the static serilog instance (once per UnitTest lifetime). Syntactic sugar for lazy MS Logger. | Will build and return a Microsoft logger from the static serilog instance (once per UnitTest lifetime). Syntactic sugar for lazy MS Logger. |
-| `ILoggingTest.Delay(millisecondsDelay, reason, log, cancellationToken)` | Wraps Task.Delay with a log statement. Should be used for delays in tests. | A task that completes when the delay operation is complete. |
-
-## Practical notes
-
-- Cancellation stops pending work; it does not undo work that has already completed.
+Prefer waiting on an observable condition when one is available. A logged delay makes an unavoidable timing wait easier to diagnose, but it does not make time-dependent tests deterministic.

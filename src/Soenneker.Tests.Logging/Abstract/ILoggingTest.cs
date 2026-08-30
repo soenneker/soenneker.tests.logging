@@ -10,13 +10,12 @@ namespace Soenneker.Tests.Logging.Abstract;
 public interface ILoggingTest
 {
     /// <summary>
-    /// Will build and return a Microsoft logger from the static serilog instance (once per UnitTest lifetime). <para/>
-    /// Syntactic sugar for lazy MS Logger
+    /// Gets the logger configured by the concrete test base.
     /// </summary>
     ILogger<LoggingTest> Logger { get; }
 
     /// <summary>
-    /// Wraps Task.Delay with a log statement. Should be used for delays in tests. <para/>
+    /// Logs an optional reason and then asynchronously waits for the requested duration.
     /// </summary>
     /// <param name="millisecondsDelay">Milliseconds Delay for the delay operation.</param>
     /// <param name="reason">Reason for the delay operation.</param>
